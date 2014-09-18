@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="black">#000000</color>
+    <color name="circle_background">#3D97F2</color>
+    <color name="layout_background">#DFDFDF</color>
+
+</resources>
