@@ -39,6 +39,35 @@
                 android:layout_width="@dimen/seek_bar_label_width"
                 android:layout_height="wrap_content"
                 style="@style/text_view"
+                android:text="@string/scale"/>
+
+            <SeekBar
+                android:id="@+id/seekbar_target_scale"
+                android:layout_width="@dimen/seek_bar_width"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:progress="0"
+                android:layout_marginRight="@dimen/single_space"/>
+
+            <TextView
+                android:id="@+id/tv_target_scale"
+                android:layout_width="@dimen/seek_bar_value_width"
+                android:layout_height="wrap_content"
+                style="@style/text_view"
+                android:text="0"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/double_space">
+
+            <TextView
+                android:layout_width="@dimen/seek_bar_label_width"
+                android:layout_height="wrap_content"
+                style="@style/text_view"
                 android:text="@string/tension"/>
 
             <SeekBar

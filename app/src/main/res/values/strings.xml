@@ -3,6 +3,7 @@
 
     <string name="app_name">Bounce Demo</string>
 
+    <string name="scale">SCALE</string>
     <string name="tension">TENSION</string>
     <string name="damping">DAMPING</string>
 </resources>

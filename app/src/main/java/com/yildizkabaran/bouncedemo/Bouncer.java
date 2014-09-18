@@ -24,13 +24,13 @@ public class Bouncer implements View.OnTouchListener {
   /** default parameter values **/
   public static final float DEF_TARGET_SCALE = 0.7F;
   public static final float DEF_DAMPING = 0.15F;
-  public static final float DEF_SPRING_CONSTANT = 7.5F;
+  public static final float DEF_TENSION = 7.5F;
   public static final int DEF_BOUNDS_THRESHOLD = 10;
 
   /** fixed values **/
   private static final long FIXED_ANIM_DELAY = 20; // physics are updated every 20ms
   private static final float STOP_THRESHOLD = 0.01F; // threshold value used to determine end of animation
-  private static final float MASS_COEFFICIENT = 100F; // a dummy value to allow DEF_SPRING_CONSTANT to have more realistic values
+  private static final float MASS_COEFFICIENT = 100F; // a dummy value to allow tension to have more realistic values
 
   /** some variables for easy access **/
   private Rect mBounds; // determine the bounds the view will be active on
@@ -39,7 +39,7 @@ public class Bouncer implements View.OnTouchListener {
   /** adjustable variables **/
   private float targetScale = DEF_TARGET_SCALE; // scales the view up/down to this target, overshoots
   private float friction = 1 - DEF_DAMPING; // friction applied to velocity to damp the motion
-  private float springConstant = DEF_SPRING_CONSTANT / MASS_COEFFICIENT; // amount the spring force is multiplied with before being applied
+  private float springConstant = DEF_TENSION / MASS_COEFFICIENT; // amount the spring force is multiplied with before being applied
   private int boundsThreshold = DEF_BOUNDS_THRESHOLD; // can move touch this much outside of view bounds and still click
 
   /** variables for keeping the state of the motion **/
@@ -130,20 +130,20 @@ public class Bouncer implements View.OnTouchListener {
   }
 
   /***
-   * Setter for the spring constant for the animation tension. The view is scaled down and up assuming
-   * a system with a spring that is connected on one end to scale of 1, and another to minimum scale;
-   * depending on the direction of motion. The force created by this spring is calculated as F = k * d
-   * where F is force, d is the amount of displacement to the target scale, and k is the spring constant
-   * set here. The units of the spring constant are arbitrary, though higher spring constants will speed
-   * up the animation.
-   * @param springConstant any value greater than 0, although values outside of 2 to 40 are not expected to behave well
+   * Setter for the animation tension. The view is scaled down and up assuming a system with a spring
+   * that is connected on one end to scale of 1, and another to target scale; depending on the
+   * direction of motion. The force created by this spring is calculated as F = k * d where F is force,
+   * d is the amount of displacement to the target scale, and k is the spring constant determined by
+   * the tension here. The units of the spring constant are arbitrary, though higher spring constants
+   * will speed up the animation.
+   * @param tension any value greater than 0, although values outside of 2 to 40 are not expected to behave well
    */
-  public void setSpringConstant(float springConstant){
-    if(springConstant <= 0){
-      throw new IllegalArgumentException("spring constant must be greater than 0");
+  public void setTension(float tension){
+    if(tension <= 0){
+      throw new IllegalArgumentException("tension must be greater than 0");
     }
     // scale the input by MASS_COEFFICIENT to allow for a nicer range for the allowed values
-    this.springConstant = springConstant / MASS_COEFFICIENT;
+    this.springConstant = tension / MASS_COEFFICIENT;
   }
 
   /***
